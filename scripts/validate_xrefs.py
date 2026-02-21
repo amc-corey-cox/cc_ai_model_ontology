@@ -70,10 +70,19 @@ def validate_internal() -> list[str]:
 
 def validate_external() -> list[str]:
     """HEAD-request external URLs to check they're reachable."""
-    import requests
+    try:
+        import requests
+    except ImportError:
+        print(
+            "Error: 'requests' is required for external URL validation.\n"
+            "Install with: uv sync",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
 
     errors = []
     urls_checked = set()
+    headers = {"User-Agent": "cc-ai-model-ontology-validator/0.2.0"}
 
     models_data = load_data("data/models.yaml")
 
@@ -87,7 +96,7 @@ def validate_external() -> list[str]:
             if url not in urls_checked:
                 urls_checked.add(url)
                 try:
-                    resp = requests.head(url, timeout=10, allow_redirects=True)
+                    resp = requests.head(url, timeout=10, allow_redirects=True, headers=headers)
                     if resp.status_code >= 400:
                         errors.append(f"{mid}: HuggingFace URL returned {resp.status_code}: {url}")
                     else:
@@ -103,7 +112,7 @@ def validate_external() -> list[str]:
             if url not in urls_checked:
                 urls_checked.add(url)
                 try:
-                    resp = requests.head(url, timeout=10, allow_redirects=True)
+                    resp = requests.head(url, timeout=10, allow_redirects=True, headers=headers)
                     if resp.status_code >= 400:
                         errors.append(f"{mid}: Ollama URL returned {resp.status_code}: {url}")
                     else:
@@ -117,7 +126,7 @@ def validate_external() -> list[str]:
             if url and url not in urls_checked:
                 urls_checked.add(url)
                 try:
-                    resp = requests.head(url, timeout=10, allow_redirects=True)
+                    resp = requests.head(url, timeout=10, allow_redirects=True, headers=headers)
                     if resp.status_code >= 400:
                         errors.append(f"{mid}: source[{i}] URL returned {resp.status_code}: {url}")
                     else:
