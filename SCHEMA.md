@@ -21,6 +21,11 @@ cc_ai_model_ontology/
 │   ├── capabilities.yaml     # Capability hierarchy
 │   ├── tiers.yaml            # Hardware tier definitions
 │   └── models.yaml           # Model instances
+├── scripts/
+│   ├── validate.py           # Schema validation
+│   ├── validate_provenance.py # Provenance business rules
+│   └── validate_xrefs.py     # Cross-reference validation
+├── Makefile                   # Validation targets
 └── SCHEMA.md                 # This document
 ```
 
@@ -37,6 +42,8 @@ cc_ai_model_ontology/
 | `HardwareTier` | Deployment constraints (GPU, CPU, API) |
 | `Model` | Specific model variant |
 | `EmbeddingModel` | Specialized embedding model |
+| `Source` | A source of information for a data entry |
+| `AIMetadata` | Metadata about AI-assisted curation |
 
 **Container Classes** (for data file validation):
 
@@ -54,7 +61,9 @@ Model
   ├── member_of_family → ModelFamily
   ├── derived_from → Model (optional)
   ├── has_capability → Capability (multivalued)
-  └── fits_tier → HardwareTier (multivalued)
+  ├── fits_tier → HardwareTier (multivalued)
+  ├── sources → Source[] (provenance)
+  └── ai_metadata → AIMetadata (optional)
 
 Capability
   └── parent_capability → Capability (hierarchy)
@@ -83,27 +92,27 @@ Namespaces:
 ### Validation
 
 ```bash
-# Install LinkML
-pip install linkml
+# Run all validation
+make validate-all
 
-# Validate data against schema (specify container class)
-linkml-validate -s schema/ccf_models.yaml -C ModelDatabase data/models.yaml
-linkml-validate -s schema/ccf_models.yaml -C FamilyDatabase data/families.yaml
-linkml-validate -s schema/ccf_models.yaml -C CapabilityDatabase data/capabilities.yaml
-linkml-validate -s schema/ccf_models.yaml -C TierDatabase data/tiers.yaml
+# Individual checks
+make validate              # LinkML schema validation
+make validate-provenance   # Provenance business rules
+make validate-xrefs ARGS="--internal"  # Internal cross-references
+make validate-xrefs ARGS="--external"  # External URL checks
 ```
 
 ### Generate Artifacts
 
 ```bash
 # Generate JSON Schema
-gen-json-schema schema/ccf_models.yaml > ccf_models.schema.json
+make gen-json-schema
 
 # Generate Python dataclasses
-gen-python schema/ccf_models.yaml > ccf_models.py
+uv run gen-python schema/ccf_models.yaml > ccf_models.py
 
 # Generate OWL ontology
-gen-owl schema/ccf_models.yaml > ccf_models.owl
+uv run gen-owl schema/ccf_models.yaml > ccf_models.owl
 ```
 
 ### Load in Python
@@ -126,6 +135,48 @@ The schema defines controlled vocabularies:
 | `QuantizationType` | fp16, q8_0, q6_k, q5_k_m, q4_k_m, q3_k_m, q2_k |
 | `TierType` | tier1_gpu, tier2_cpu, tier3_api |
 | `ModelStatus` | active, deprecated, experimental |
+| `CurationType` | human_curated, ai_assisted, ai_generated, automated |
+| `VerifiedByType` | human, automated, unverified |
+| `SourceType` | model_card, paper, official_announcement, repository, api_verified, community |
+
+## Provenance
+
+### Source Class
+
+Tracks where information came from:
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `source_type` | SourceType | Yes | Type of source |
+| `url` | uri | Yes | URL of the source |
+| `accessed` | date | Yes | When the source was accessed |
+| `title` | string | No | Title of the source |
+
+### AIMetadata Class
+
+Records AI involvement in curation:
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `model` | string | Yes | AI model used (e.g., "claude-opus-4-6") |
+| `generation_date` | date | Yes | When the AI generated the data |
+| `confidence_notes` | string | No | Notes about uncertainty |
+
+### Provenance Slots on Model
+
+| Slot | Type | Required | Description |
+|------|------|----------|-------------|
+| `sources` | Source[] | Yes | At least one source |
+| `curation_type` | CurationType | Yes | How data was gathered |
+| `date_added` | date | Yes | When entry was created |
+| `added_by` | string | Yes | Who added it |
+| `verified_by` | VerifiedByType | No | What verified it |
+| `verification_date` | date | No | When verified |
+| `ai_metadata` | AIMetadata | No | AI curation details |
+
+ModelFamily has the same slots, all optional.
+
+Capability and HardwareTier do **not** have provenance (they are definitional taxonomy, not factual claims).
 
 ## Cross-References
 
@@ -139,7 +190,7 @@ Models include xrefs to external systems:
 
 ## Versioning
 
-Schema version: `0.1.0`
+Schema version: `0.2.0`
 
 Follows semantic versioning:
 - **Major**: Breaking schema changes
