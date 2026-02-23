@@ -9,7 +9,7 @@ description: >-
   Designed for local-first AI development.
 
 license: Apache-2.0
-version: 0.1.0
+version: 0.2.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
@@ -97,6 +97,44 @@ enums:
       experimental:
         description: Not yet validated
 
+  CurationType:
+    description: How data was gathered and curated
+    permissible_values:
+      human_curated:
+        description: Manually researched and entered by a human
+      ai_assisted:
+        description: AI gathered data with human direction/review
+      ai_generated:
+        description: Fully AI-generated without human review
+      automated:
+        description: Programmatic extraction from APIs/registries
+
+  VerifiedByType:
+    description: What verified the data
+    permissible_values:
+      human:
+        description: Verified by a human reviewer
+      automated:
+        description: Verified by automated validation
+      unverified:
+        description: Not yet verified
+
+  SourceType:
+    description: Type of information source
+    permissible_values:
+      model_card:
+        description: Official model card (e.g., HuggingFace)
+      paper:
+        description: Published research paper
+      official_announcement:
+        description: Official blog post or announcement
+      repository:
+        description: Source code repository
+      api_verified:
+        description: Verified via API call
+      community:
+        description: Community-sourced information
+
 # =============================================================================
 # CLASSES
 # =============================================================================
@@ -157,6 +195,46 @@ classes:
     class_uri: schema:Thing
 
   # ---------------------------------------------------------------------------
+  # Provenance Classes
+  # ---------------------------------------------------------------------------
+
+  Source:
+    description: A source of information for a data entry
+    class_uri: ccf:Source
+    attributes:
+      source_type:
+        range: SourceType
+        required: true
+        description: Type of source
+      url:
+        range: uri
+        required: true
+        description: URL of the source
+      accessed:
+        range: date
+        required: true
+        description: Date the source was accessed
+      title:
+        range: string
+        description: Optional title of the source
+
+  AIMetadata:
+    description: Metadata about AI-assisted curation
+    class_uri: ccf:AIMetadata
+    attributes:
+      model:
+        range: string
+        required: true
+        description: AI model used (e.g., "claude-opus-4-6")
+      generation_date:
+        range: date
+        required: true
+        description: Date the AI generated the data
+      confidence_notes:
+        range: string
+        description: Notes about AI confidence or uncertainty
+
+  # ---------------------------------------------------------------------------
   # Model Family
   # ---------------------------------------------------------------------------
 
@@ -169,6 +247,13 @@ classes:
       - homepage
       - xref_huggingface
       - xref_github
+      - sources
+      - curation_type
+      - date_added
+      - added_by
+      - verified_by
+      - verification_date
+      - ai_metadata
     slot_usage:
       id:
         pattern: "^ccf:family:[a-z0-9-]+$"
@@ -225,10 +310,25 @@ classes:
       - xref_ollama
       - xref_huggingface
       - cc_forge_notes
+      - sources
+      - curation_type
+      - date_added
+      - added_by
+      - verified_by
+      - verification_date
+      - ai_metadata
     slot_usage:
       id:
         pattern: "^ccf:model:[a-z0-9.-]+$"
       member_of_family:
+        required: true
+      sources:
+        required: true
+      curation_type:
+        required: true
+      date_added:
+        required: true
+      added_by:
         required: true
 
   # ---------------------------------------------------------------------------
@@ -400,3 +500,45 @@ slots:
     description: CC Forge-specific usage notes
     range: string
     slot_uri: ccf:ccForgeNotes
+
+  # ---------------------------------------------------------------------------
+  # Provenance Slots
+  # ---------------------------------------------------------------------------
+
+  sources:
+    description: Sources of information for this entry
+    range: Source
+    multivalued: true
+    inlined_as_list: true
+    slot_uri: ccf:sources
+
+  curation_type:
+    description: How this data was gathered
+    range: CurationType
+    slot_uri: ccf:curationType
+
+  date_added:
+    description: Date this entry was created
+    range: date
+    slot_uri: ccf:dateAdded
+
+  added_by:
+    description: Who added this entry (human or agent identifier)
+    range: string
+    slot_uri: ccf:addedBy
+
+  verified_by:
+    description: What verified this entry
+    range: VerifiedByType
+    slot_uri: ccf:verifiedBy
+
+  verification_date:
+    description: Date this entry was verified
+    range: date
+    slot_uri: ccf:verificationDate
+
+  ai_metadata:
+    description: Metadata about AI-assisted curation
+    range: AIMetadata
+    inlined: true
+    slot_uri: ccf:aiMetadata

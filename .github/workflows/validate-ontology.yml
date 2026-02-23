@@ -1,44 +1,50 @@
 name: Validate Ontology
 
 on:
-  push:
-    paths:
-      - 'schema/**'
-      - 'data/**'
-      - '.github/workflows/validate-ontology.yml'
   pull_request:
     paths:
       - 'schema/**'
       - 'data/**'
+      - 'scripts/**'
+      - 'pyproject.toml'
       - '.github/workflows/validate-ontology.yml'
 
 jobs:
-  validate-linkml:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v4
 
-      - name: Install LinkML
-        run: pip install linkml
+      - name: Install dependencies
+        run: uv sync
 
       - name: Validate schema syntax
         run: |
-          gen-python schema/ccf_models.yaml > /dev/null
+          uv run gen-python schema/ccf_models.yaml > /dev/null
           echo "Schema syntax is valid"
 
-      - name: Validate data files
-        run: |
-          echo "Validating families..."
-          linkml-validate -s schema/ccf_models.yaml -C FamilyDatabase data/families.yaml
-          echo "Validating capabilities..."
-          linkml-validate -s schema/ccf_models.yaml -C CapabilityDatabase data/capabilities.yaml
-          echo "Validating tiers..."
-          linkml-validate -s schema/ccf_models.yaml -C TierDatabase data/tiers.yaml
-          echo "Validating models..."
-          linkml-validate -s schema/ccf_models.yaml -C ModelDatabase data/models.yaml
-          echo "All data files are valid"
+      - name: Validate data files (LinkML)
+        run: make validate
+
+      - name: Validate provenance rules
+        run: make validate-provenance
+
+      - name: Validate internal cross-references
+        run: uv run python scripts/validate_xrefs.py --internal
+
+  validate-external:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Validate external URLs
+        run: uv run python scripts/validate_xrefs.py --external
