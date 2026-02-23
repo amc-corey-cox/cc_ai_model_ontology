@@ -84,55 +84,41 @@ def validate_external() -> list[str]:
     urls_checked = set()
     headers = {"User-Agent": "cc-ai-model-ontology-validator/0.2.0"}
 
+    def check_url(url: str, label: str):
+        """Check a URL is reachable. Falls back to GET if HEAD returns 405."""
+        if url in urls_checked:
+            return
+        urls_checked.add(url)
+        try:
+            resp = requests.head(url, timeout=10, allow_redirects=True, headers=headers)
+            if resp.status_code == 405:
+                resp = requests.get(url, timeout=10, allow_redirects=True, headers=headers, stream=True)
+                resp.close()
+            if resp.status_code >= 400:
+                errors.append(f"{label} returned {resp.status_code}: {url}")
+            else:
+                print(f"  OK: {url}")
+        except requests.RequestException as e:
+            errors.append(f"{label} unreachable: {url} ({e})")
+
     models_data = load_data("data/models.yaml")
 
     for model in models_data.get("models", []):
         mid = model.get("id", "<unknown>")
 
-        # Check HuggingFace xref
         hf = model.get("xref_huggingface")
         if hf:
-            url = f"https://huggingface.co/{hf}"
-            if url not in urls_checked:
-                urls_checked.add(url)
-                try:
-                    resp = requests.head(url, timeout=10, allow_redirects=True, headers=headers)
-                    if resp.status_code >= 400:
-                        errors.append(f"{mid}: HuggingFace URL returned {resp.status_code}: {url}")
-                    else:
-                        print(f"  OK: {url}")
-                except requests.RequestException as e:
-                    errors.append(f"{mid}: HuggingFace URL unreachable: {url} ({e})")
+            check_url(f"https://huggingface.co/{hf}", f"{mid}: HuggingFace URL")
 
-        # Check Ollama xref
         ollama = model.get("xref_ollama")
         if ollama:
             tag = ollama.split(":")[0]
-            url = f"https://ollama.com/library/{tag}"
-            if url not in urls_checked:
-                urls_checked.add(url)
-                try:
-                    resp = requests.head(url, timeout=10, allow_redirects=True, headers=headers)
-                    if resp.status_code >= 400:
-                        errors.append(f"{mid}: Ollama URL returned {resp.status_code}: {url}")
-                    else:
-                        print(f"  OK: {url}")
-                except requests.RequestException as e:
-                    errors.append(f"{mid}: Ollama URL unreachable: {url} ({e})")
+            check_url(f"https://ollama.com/library/{tag}", f"{mid}: Ollama URL")
 
-        # Check provenance source URLs
         for i, source in enumerate(model.get("sources", [])):
             url = source.get("url", "")
-            if url and url not in urls_checked:
-                urls_checked.add(url)
-                try:
-                    resp = requests.head(url, timeout=10, allow_redirects=True, headers=headers)
-                    if resp.status_code >= 400:
-                        errors.append(f"{mid}: source[{i}] URL returned {resp.status_code}: {url}")
-                    else:
-                        print(f"  OK: {url}")
-                except requests.RequestException as e:
-                    errors.append(f"{mid}: source[{i}] URL unreachable: {url} ({e})")
+            if url:
+                check_url(url, f"{mid}: source[{i}] URL")
 
     return errors
 
