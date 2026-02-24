@@ -27,9 +27,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   - id: ccf:model:qwen2.5-coder-32b
@@ -53,9 +53,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   - id: ccf:model:qwen2.5-7b
@@ -78,9 +78,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/Qwen/Qwen2.5-7B-Instruct
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   - id: ccf:model:qwq-32b
@@ -104,9 +104,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/Qwen/QwQ-32B
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   # ==========================================================================
@@ -132,9 +132,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/deepseek-ai/DeepSeek-R1
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   - id: ccf:model:deepseek-r1-7b
@@ -158,9 +158,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   - id: ccf:model:deepseek-r1-32b
@@ -183,9 +183,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   # ==========================================================================
@@ -213,9 +213,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   - id: ccf:model:llama-3.3-70b
@@ -239,9 +239,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   # ==========================================================================
@@ -267,9 +267,9 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   - id: ccf:model:codestral-22b
@@ -291,9 +291,9 @@ models:
     sources:
       - source_type: official_announcement
         url: https://mistral.ai/news/codestral
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
 
   # ==========================================================================
@@ -319,7 +319,7 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/nomic-ai/nomic-embed-text-v1.5
-        accessed: "2025-01-27"
+        accessed: "2026-01-27"
     curation_type: ai_assisted
-    date_added: "2025-01-27"
+    date_added: "2026-01-27"
     added_by: agent:claude
