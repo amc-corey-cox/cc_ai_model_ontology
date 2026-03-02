@@ -112,6 +112,29 @@ models:
     date_added: "2026-01-27"
     added_by: agent:claude
 
+  - id: ccf:model:qwen2-vl-7b
+    label: Qwen2-VL-7B-Instruct
+    description: 7B vision-language model with dynamic resolution image understanding
+    member_of_family: ccf:family:qwen
+    has_capability:
+      - ccf:capability:image-understanding
+      - ccf:capability:chat
+      - ccf:capability:instruction-following
+    parameter_count: "7B"
+    context_length: 32768
+    fits_tier:
+      - ccf:tier:gpu-8gb
+    license: apache-2.0
+    status: active
+    xref_huggingface: Qwen/Qwen2-VL-7B-Instruct
+    sources:
+      - source_type: model_card
+        url: https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct
+        accessed: "2026-03-02"
+    curation_type: ai_assisted
+    date_added: "2026-03-02"
+    added_by: agent:claude
+
   # ==========================================================================
   # DeepSeek Family
   # ==========================================================================
@@ -349,33 +372,6 @@ models:
     sources:
       - source_type: model_card
         url: https://huggingface.co/openai/whisper-large-v3
-        accessed: "2026-03-02"
-    curation_type: ai_assisted
-    date_added: "2026-03-02"
-    added_by: agent:claude
-
-  # ==========================================================================
-  # Qwen Vision Models
-  # ==========================================================================
-
-  - id: ccf:model:qwen2-vl-7b
-    label: Qwen2-VL-7B-Instruct
-    description: 7B vision-language model with dynamic resolution image understanding
-    member_of_family: ccf:family:qwen
-    has_capability:
-      - ccf:capability:image-understanding
-      - ccf:capability:chat
-      - ccf:capability:instruction-following
-    parameter_count: "7B"
-    context_length: 32768
-    fits_tier:
-      - ccf:tier:gpu-8gb
-    license: apache-2.0
-    status: active
-    xref_huggingface: Qwen/Qwen2-VL-7B-Instruct
-    sources:
-      - source_type: model_card
-        url: https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct
         accessed: "2026-03-02"
     curation_type: ai_assisted
     date_added: "2026-03-02"
