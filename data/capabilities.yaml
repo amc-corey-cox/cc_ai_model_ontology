@@ -15,6 +15,14 @@ capabilities:
     label: Image Generation
     description: Generating images from text or image input
 
+  - id: ccf:capability:speech-recognition
+    label: Speech Recognition
+    description: Converting spoken audio to text (speech-to-text)
+
+  - id: ccf:capability:image-understanding
+    label: Image Understanding
+    description: Analyzing and reasoning about visual input (vision)
+
   # Text generation subtypes
   - id: ccf:capability:code-generation
     label: Code Generation
@@ -54,4 +62,9 @@ capabilities:
   - id: ccf:capability:long-context
     label: Long Context Processing
     description: Processing documents with 32K+ token contexts
+    parent_capability: ccf:capability:text-generation
+
+  - id: ccf:capability:tool-use
+    label: Tool Use / Function Calling
+    description: Calling external tools and functions via structured output
     parent_capability: ccf:capability:text-generation

@@ -45,3 +45,26 @@ families:
     developed_by: Nomic AI
     homepage: https://www.nomic.ai/
     xref_huggingface: nomic-ai
+
+  - id: ccf:family:openai
+    label: OpenAI
+    description: Models developed by OpenAI, including GPT and Whisper families
+    developed_by: OpenAI
+    homepage: https://openai.com/
+    xref_huggingface: openai
+    xref_github: openai
+
+  - id: ccf:family:phi
+    label: Phi
+    description: Microsoft's small language models optimized for efficiency and quality
+    developed_by: Microsoft
+    homepage: https://azure.microsoft.com/en-us/products/phi
+    xref_huggingface: microsoft
+    xref_github: microsoft
+
+  - id: ccf:family:flux
+    label: FLUX
+    description: Rectified flow transformer models for text-to-image generation
+    developed_by: Black Forest Labs
+    homepage: https://blackforestlabs.ai/
+    xref_huggingface: black-forest-labs
