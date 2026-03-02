@@ -14,6 +14,7 @@ models:
       - ccf:capability:code-generation
       - ccf:capability:code-completion
       - ccf:capability:instruction-following
+      - ccf:capability:tool-use
     parameter_count: "7B"
     context_length: 131072
     fits_tier:
@@ -40,6 +41,7 @@ models:
       - ccf:capability:code-generation
       - ccf:capability:code-completion
       - ccf:capability:instruction-following
+      - ccf:capability:tool-use
     parameter_count: "32B"
     context_length: 131072
     fits_tier:
@@ -66,6 +68,7 @@ models:
       - ccf:capability:chat
       - ccf:capability:instruction-following
       - ccf:capability:long-context
+      - ccf:capability:tool-use
     parameter_count: "7B"
     context_length: 131072
     fits_tier:
@@ -108,6 +111,32 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+
+  - id: ccf:model:qwen2-vl-7b
+    label: Qwen2-VL-7B-Instruct
+    description: 7B vision-language model with dynamic resolution image understanding
+    member_of_family: ccf:family:qwen
+    has_capability:
+      - ccf:capability:image-understanding
+      - ccf:capability:chat
+      - ccf:capability:instruction-following
+    parameter_count: "7B"
+    context_length: 32768
+    fits_tier:
+      - ccf:tier:gpu-8gb
+    license: apache-2.0
+    status: active
+    xref_huggingface: Qwen/Qwen2-VL-7B-Instruct
+    sources:
+      - source_type: model_card
+        url: https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct
+        accessed: "2026-03-02"
+    curation_type: ai_assisted
+    date_added: "2026-03-02"
+    added_by: agent:claude
+    ai_metadata:
+      model: claude-opus-4-6
+      generation_date: "2026-03-02"
 
   # ==========================================================================
   # DeepSeek Family
@@ -200,6 +229,7 @@ models:
       - ccf:capability:chat
       - ccf:capability:instruction-following
       - ccf:capability:long-context
+      - ccf:capability:tool-use
     parameter_count: "8B"
     context_length: 131072
     fits_tier:
@@ -226,6 +256,7 @@ models:
       - ccf:capability:chat
       - ccf:capability:instruction-following
       - ccf:capability:long-context
+      - ccf:capability:tool-use
     parameter_count: "70B"
     context_length: 131072
     fits_tier:
@@ -255,6 +286,7 @@ models:
     has_capability:
       - ccf:capability:chat
       - ccf:capability:instruction-following
+      - ccf:capability:tool-use
     parameter_count: "7B"
     context_length: 32768
     fits_tier:
@@ -323,3 +355,115 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+
+  # ==========================================================================
+  # OpenAI Family
+  # ==========================================================================
+
+  - id: ccf:model:whisper-large-v3
+    label: Whisper Large v3
+    description: 1.5B speech recognition model supporting 99+ languages
+    member_of_family: ccf:family:openai
+    has_capability:
+      - ccf:capability:speech-recognition
+    parameter_count: "1.5B"
+    fits_tier:
+      - ccf:tier:gpu-8gb
+    license: apache-2.0
+    status: active
+    xref_huggingface: openai/whisper-large-v3
+    sources:
+      - source_type: model_card
+        url: https://huggingface.co/openai/whisper-large-v3
+        accessed: "2026-03-02"
+    curation_type: ai_assisted
+    date_added: "2026-03-02"
+    added_by: agent:claude
+    ai_metadata:
+      model: claude-opus-4-6
+      generation_date: "2026-03-02"
+
+  # ==========================================================================
+  # Stable Diffusion Models
+  # ==========================================================================
+
+  - id: ccf:model:sdxl-1.0
+    label: Stable Diffusion XL 1.0
+    description: 3.5B text-to-image diffusion model generating 1024x1024 images
+    member_of_family: ccf:family:stable-diffusion
+    has_capability:
+      - ccf:capability:image-generation
+    parameter_count: "3.5B"
+    fits_tier:
+      - ccf:tier:gpu-8gb
+    status: active
+    xref_huggingface: stabilityai/stable-diffusion-xl-base-1.0
+    sources:
+      - source_type: model_card
+        url: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0
+        accessed: "2026-03-02"
+    curation_type: ai_assisted
+    date_added: "2026-03-02"
+    added_by: agent:claude
+    ai_metadata:
+      model: claude-opus-4-6
+      generation_date: "2026-03-02"
+
+  # ==========================================================================
+  # FLUX Family
+  # ==========================================================================
+
+  - id: ccf:model:flux.1-schnell
+    label: FLUX.1 [schnell]
+    description: 12B rectified flow transformer for fast text-to-image generation
+    member_of_family: ccf:family:flux
+    has_capability:
+      - ccf:capability:image-generation
+    parameter_count: "12B"
+    fits_tier:
+      - ccf:tier:cpu-64gb
+    license: apache-2.0
+    status: active
+    xref_huggingface: black-forest-labs/FLUX.1-schnell
+    sources:
+      - source_type: model_card
+        url: https://huggingface.co/black-forest-labs/FLUX.1-schnell
+        accessed: "2026-03-02"
+    curation_type: ai_assisted
+    date_added: "2026-03-02"
+    added_by: agent:claude
+    ai_metadata:
+      model: claude-opus-4-6
+      generation_date: "2026-03-02"
+
+  # ==========================================================================
+  # Phi Family
+  # ==========================================================================
+
+  - id: ccf:model:phi-3-mini
+    label: Phi-3-mini-128k-instruct
+    description: 3.8B efficient language model competitive with much larger models
+    member_of_family: ccf:family:phi
+    has_capability:
+      - ccf:capability:chat
+      - ccf:capability:instruction-following
+      - ccf:capability:reasoning-cot
+    parameter_count: "3.8B"
+    context_length: 128000
+    fits_tier:
+      - ccf:tier:gpu-8gb
+    recommended_quantization: q4_k_m
+    license: mit
+    status: active
+    xref_ollama: "phi3:mini-128k"
+    xref_huggingface: microsoft/Phi-3-mini-128k-instruct
+    sources:
+      - source_type: model_card
+        url: https://huggingface.co/microsoft/Phi-3-mini-128k-instruct
+        accessed: "2026-03-02"
+    curation_type: ai_assisted
+    date_added: "2026-03-02"
+    added_by: agent:claude
+    ai_metadata:
+      model: claude-opus-4-6
+      generation_date: "2026-03-02"
