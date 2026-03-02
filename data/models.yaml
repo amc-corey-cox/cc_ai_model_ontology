@@ -372,7 +372,6 @@ models:
       - ccf:tier:gpu-8gb
     license: apache-2.0
     status: active
-    xref_ollama: "qwen2-vl:7b"
     xref_huggingface: Qwen/Qwen2-VL-7B-Instruct
     sources:
       - source_type: model_card
