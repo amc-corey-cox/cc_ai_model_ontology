@@ -56,6 +56,8 @@ enums:
         description: Meta Llama Community License
       cc-by-nc-4.0:
         description: Creative Commons Non-Commercial
+      openrail++:
+        description: CreativeML Open RAIL++-M License
       proprietary:
         description: Proprietary license
 
@@ -118,6 +120,18 @@ enums:
         description: Verified by automated validation
       unverified:
         description: Not yet verified
+
+  Modality:
+    description: Input/output data modalities for models
+    permissible_values:
+      text:
+        description: Natural language text
+      image:
+        description: Static images
+      audio:
+        description: Audio / speech
+      embedding:
+        description: Vector embeddings
 
   SourceType:
     description: Type of information source
@@ -301,6 +315,8 @@ classes:
       - member_of_family
       - derived_from
       - has_capability
+      - input_modalities
+      - output_modalities
       - parameter_count
       - context_length
       - fits_tier
@@ -414,6 +430,22 @@ slots:
     range: HardwareTier
     multivalued: true
     slot_uri: ccf:fitsTier
+
+  # ---------------------------------------------------------------------------
+  # Modality Slots
+  # ---------------------------------------------------------------------------
+
+  input_modalities:
+    description: Data modalities the model accepts as input
+    range: Modality
+    multivalued: true
+    slot_uri: ccf:inputModalities
+
+  output_modalities:
+    description: Data modalities the model produces as output
+    range: Modality
+    multivalued: true
+    slot_uri: ccf:outputModalities
 
   # ---------------------------------------------------------------------------
   # Model Property Slots
