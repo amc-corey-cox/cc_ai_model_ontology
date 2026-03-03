@@ -15,6 +15,10 @@ models:
       - ccf:capability:code-completion
       - ccf:capability:instruction-following
       - ccf:capability:tool-use
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "7B"
     context_length: 131072
     fits_tier:
@@ -32,6 +36,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   - id: ccf:model:qwen2.5-coder-32b
     label: Qwen2.5-Coder-32B-Instruct
@@ -42,6 +50,10 @@ models:
       - ccf:capability:code-completion
       - ccf:capability:instruction-following
       - ccf:capability:tool-use
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "32B"
     context_length: 131072
     fits_tier:
@@ -59,6 +71,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   - id: ccf:model:qwen2.5-7b
     label: Qwen2.5-7B-Instruct
@@ -69,6 +85,10 @@ models:
       - ccf:capability:instruction-following
       - ccf:capability:long-context
       - ccf:capability:tool-use
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "7B"
     context_length: 131072
     fits_tier:
@@ -85,6 +105,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   - id: ccf:model:qwq-32b
     label: QwQ-32B
@@ -94,6 +118,10 @@ models:
       - ccf:capability:reasoning-cot
       - ccf:capability:reasoning-math
       - ccf:capability:code-generation
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "32B"
     context_length: 32768
     fits_tier:
@@ -111,6 +139,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   - id: ccf:model:qwen2-vl-7b
     label: Qwen2-VL-7B-Instruct
@@ -120,6 +152,11 @@ models:
       - ccf:capability:image-understanding
       - ccf:capability:chat
       - ccf:capability:instruction-following
+    input_modalities:
+      - text
+      - image
+    output_modalities:
+      - text
     parameter_count: "7B"
     context_length: 32768
     fits_tier:
@@ -150,6 +187,10 @@ models:
       - ccf:capability:reasoning-cot
       - ccf:capability:reasoning-math
       - ccf:capability:code-generation
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "671B"
     context_length: 131072
     fits_tier:
@@ -165,6 +206,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   - id: ccf:model:deepseek-r1-7b
     label: DeepSeek-R1-Distill-7B
@@ -174,6 +219,10 @@ models:
     has_capability:
       - ccf:capability:reasoning-cot
       - ccf:capability:reasoning-math
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "7B"
     context_length: 65536
     fits_tier:
@@ -191,6 +240,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   - id: ccf:model:deepseek-r1-32b
     label: DeepSeek-R1-Distill-32B
@@ -200,6 +253,10 @@ models:
     has_capability:
       - ccf:capability:reasoning-cot
       - ccf:capability:reasoning-math
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "32B"
     context_length: 65536
     fits_tier:
@@ -216,6 +273,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   # ==========================================================================
   # Llama Family
@@ -230,6 +291,10 @@ models:
       - ccf:capability:instruction-following
       - ccf:capability:long-context
       - ccf:capability:tool-use
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "8B"
     context_length: 131072
     fits_tier:
@@ -247,6 +312,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   - id: ccf:model:llama-3.3-70b
     label: Llama-3.3-70B-Instruct
@@ -257,6 +326,10 @@ models:
       - ccf:capability:instruction-following
       - ccf:capability:long-context
       - ccf:capability:tool-use
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "70B"
     context_length: 131072
     fits_tier:
@@ -274,6 +347,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   # ==========================================================================
   # Mistral Family
@@ -287,6 +364,10 @@ models:
       - ccf:capability:chat
       - ccf:capability:instruction-following
       - ccf:capability:tool-use
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "7B"
     context_length: 32768
     fits_tier:
@@ -303,6 +384,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   - id: ccf:model:codestral-22b
     label: Codestral-22B
@@ -311,6 +396,10 @@ models:
     has_capability:
       - ccf:capability:code-generation
       - ccf:capability:code-completion
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "22B"
     context_length: 262144
     fits_tier:
@@ -327,6 +416,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   # ==========================================================================
   # Embedding Models
@@ -338,6 +431,10 @@ models:
     member_of_family: ccf:family:nomic
     has_capability:
       - ccf:capability:embedding
+    input_modalities:
+      - text
+    output_modalities:
+      - embedding
     parameter_count: "137M"
     context_length: 8192
     embedding_dimensions: 768
@@ -355,6 +452,10 @@ models:
     curation_type: ai_assisted
     date_added: "2026-01-27"
     added_by: agent:claude
+    ai_metadata:
+      model: claude
+      generation_date: "2026-01-27"
+      confidence_notes: Backfilled — original model version not recorded
 
   # ==========================================================================
   # OpenAI Family
@@ -366,6 +467,10 @@ models:
     member_of_family: ccf:family:openai
     has_capability:
       - ccf:capability:speech-recognition
+    input_modalities:
+      - audio
+    output_modalities:
+      - text
     parameter_count: "1.5B"
     fits_tier:
       - ccf:tier:gpu-8gb
@@ -393,9 +498,14 @@ models:
     member_of_family: ccf:family:stable-diffusion
     has_capability:
       - ccf:capability:image-generation
+    input_modalities:
+      - text
+    output_modalities:
+      - image
     parameter_count: "3.5B"
     fits_tier:
       - ccf:tier:gpu-8gb
+    license: openrail++
     status: active
     xref_huggingface: stabilityai/stable-diffusion-xl-base-1.0
     sources:
@@ -419,6 +529,10 @@ models:
     member_of_family: ccf:family:flux
     has_capability:
       - ccf:capability:image-generation
+    input_modalities:
+      - text
+    output_modalities:
+      - image
     parameter_count: "12B"
     fits_tier:
       - ccf:tier:cpu-64gb
@@ -448,6 +562,10 @@ models:
       - ccf:capability:chat
       - ccf:capability:instruction-following
       - ccf:capability:reasoning-cot
+    input_modalities:
+      - text
+    output_modalities:
+      - text
     parameter_count: "3.8B"
     context_length: 128000
     fits_tier:
